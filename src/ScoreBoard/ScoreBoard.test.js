@@ -115,5 +115,14 @@ it('Player 1 gets the score of 30', () => {
             expect (wrapper.state([wrapper.state().currentGame]).gamePoint2).toBeLessThanOrEqual(1);
        });
 
+       it('check the new set after first game ', () => {
+        const newSet = jest.fn();
+        wrapper.setState({
+          setpoint1: 1
+           });
+        wrapper.instance().newSet();
+        expect (wrapper.state().currentGame).toBeLessThanOrEqual(1);
+      });
+
 
   });

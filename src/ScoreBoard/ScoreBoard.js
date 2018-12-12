@@ -11,6 +11,10 @@ class ScoreBoard extends Component {
       player2Points: '0',
       equalStatus1: '',
       equalStatus2: '',
+      setPoint1: 0,
+      setPoint2: 0,
+      gamePoint1: 0,
+      gamePoint2: 0,
       1: { gamePoint1:0 , gamePoint2:0 },
       2: { gamePoint1:0 , gamePoint2:0 },
       3: { gamePoint1:0 , gamePoint2:0 },
@@ -21,9 +25,12 @@ class ScoreBoard extends Component {
     this.updatePlayer2Table = this.updatePlayer2Table.bind(this);
     this.deuceCheck = this.deuceCheck.bind(this);
     this.advantageCheck = this.advantageCheck.bind(this);
-    this.gameStatus = this.gameStatus.bind(this);
-    this.gameWinner = this.gameWinner.bind(this);
+    this.advantageCheck = this.advantageCheck.bind(this);
     this.resetScore = this.resetScore.bind(this);
+    this.gameStatus = this.gameStatus.bind(this);
+    this.setWinner = this.setWinner.bind(this);
+    this.gameWinner = this.gameWinner.bind(this);
+    this.newSet = this.newSet.bind(this);
   }
 
 
@@ -122,6 +129,7 @@ gameStatus(){
 
 }
 
+
  //check if the score is greater than or equal to 40 points and have equals points
  deuceCheck(){
   if (this.state.player1Score >=3 && (this.state.player1Score === this.state.player2Score)) {
@@ -156,7 +164,8 @@ advantageCheck(){
 //update winner after each set
 gameWinner(){
   this.resetScore();
-  if (this.state.winner1 ) {
+  if (this.state.winner1 ){
+
     this.setState(prevState => {
               return Object.assign({}, prevState, {
                 [prevState.currentGame]: {
@@ -164,10 +173,12 @@ gameWinner(){
                   gamePoint2: prevState[prevState.currentGame].gamePoint2
                 }
               });
+            }, () => {
+              this.setWinner();
             });
   }
 
-  if (this.state.winner2) {
+  if (this.state.winner2){
       this.setState(prevState => {
                 return Object.assign({}, prevState, {
                   [prevState.currentGame]: {
@@ -175,8 +186,27 @@ gameWinner(){
                     gamePoint2: prevState[prevState.currentGame].gamePoint2 + 1
                   }
                 });
+              }, () => {
+                this.setWinner();
               });
   }
+}
+
+//update winner of the set
+setWinner(){
+    if ((this.state[this.state.currentGame].gamePoint1 >=4) && (this.state[this.state.currentGame].gamePoint1 >= this.state[this.state.currentGame].gamePoint2 + 2)) {
+    this.setState({ setPoint1: +this.state.setPoint1 + 1 },
+    ()=> {
+      this.newSet();
+    });
+  }
+
+    if (this.state[this.state.currentGame].gamePoint2 >=4 && (this.state[this.state.currentGame].gamePoint2 >= this.state[this.state.currentGame].gamePoint1 + 2)) {
+      this.setState({ setPoint2: +this.state.setPoint2 + 1 },
+      ()=> {
+        this.newSet();
+      });
+    }
 }
 
   //reset the score after each game
@@ -190,6 +220,32 @@ gameWinner(){
       equalStatus1: ' ',
       equalStatus2: ' ',
     });
+  }
+
+  //update new set after the set is completed
+  newSet(){
+    if (this.state.setPoint1 > 0 || this.state.setPoint2 > 0) {
+      this.setState({
+        currentGame: +this.state.currentGame + 1
+      });
+    }
+    if (this.state.setPoint1 >= 2 && (this.state.setPoint1 >= this.state.setPoint2 + 1)){
+      this.setState({
+          matchWinner: 'player1'
+      }, () => {
+          this.resetScore();
+          this.props.matchWinner(this.state.matchWinner)
+      });
+    }
+
+    if (this.state.setPoint2 >= 2 && (this.state.setPoint2 >= this.state.setPoint1 + 1)){
+      this.setState({
+          matchWinner: 'player2'
+      }, () => {
+          this.resetScore();
+          this.props.matchWinner(this.state.matchWinner)
+      });
+    }
   }
 
 
@@ -208,7 +264,7 @@ gameWinner(){
         </tr>
         <tr>
           <td>Federer</td>
-          <td>0</td>
+          <td>{this.state.setPoint2}</td>
           <td>{this.state[1].gamePoint2}</td>
           <td>{this.state[2].gamePoint2}</td>
           <td>{this.state[3].gamePoint2}</td>
@@ -217,7 +273,7 @@ gameWinner(){
         </tr>
         <tr>
           <td>Nadal</td>
-          <td>0</td>
+          <td>{this.state.setPoint1}</td>
           <td>{this.state[1].gamePoint1}</td>
           <td>{this.state[2].gamePoint1}</td>
           <td>{this.state[3].gamePoint1}</td>
