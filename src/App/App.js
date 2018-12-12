@@ -85,7 +85,7 @@ class App extends Component {
                             </div>
                             <div className="col-md-4 courtImage">
                             <Player />
-                            <p className={'match-status'}>{this.state.matchWinner1 ? "Federer won the match" : (this.state.matchWinner2 ? "Nadal won the match" : null)}</p>
+                            <h2 className={'match-status'}>{this.state.matchWinner1 ? "Federer won the match" : (this.state.matchWinner2 ? "Nadal won the match" : null)}</h2>
                             </div>
                             <div className="col-md-4">
                             {this.state.enableGame ? <Tennis playGame={this.updateTable} enable={this.state.enableGame}/> : null }

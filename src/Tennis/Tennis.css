@@ -1,0 +1,9 @@
+.play-button {
+    width: 50%;
+    background-color: brown;
+    border-color: #fff;
+    color: #fff;
+    position: absolute;
+    top: 450px;
+    height: 50px;
+  }

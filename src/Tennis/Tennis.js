@@ -49,9 +49,8 @@ class Tennis extends Component {
   render() {
     return (
       <div>
-        <p>{this.state.player1Won && !this.state.player2Won ? "Nadal wins" : (!this.state.player1Won && this.state.player2Won ? "federer wins" : null)}</p>
       <div>
-        {this.props.enable ? <button className={'btn btn-primary playButton'} onClick={this.handlePlay}>Play</button> : null}
+        {this.props.enable ? <button className={'btn play-button'} onClick={this.handlePlay}>Play</button> : null}
       </div>
       </div>
     );
