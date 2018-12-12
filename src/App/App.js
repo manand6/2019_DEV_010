@@ -10,11 +10,10 @@ class App extends Component {
     this.state = {
         player2Serve:false,
         enableGame:false,
+        tossEnabled: true,
     };
 
     this.handleToss = this.handleToss.bind(this);
-
-
   }
 
       //toss button
@@ -29,12 +28,14 @@ class App extends Component {
         toss1 === tossChosen ?
           this.setState({
               player2Serve: true,
-              enableGame: true
+              enableGame: true,
+              tossEnabled: false,
           })
         :
         this.setState({
               player2Serve: false,
               enableGame: true,
+              tossEnabled: false,
         })
     }
 
@@ -46,7 +47,8 @@ class App extends Component {
         <div className="container">
         <div className="row">
             <div className="col-md-4">
-                            {<button className={'btn'} onClick={this.handleToss}>Toss</button>}
+                            {this.state.tossEnabled && (<button className={'btn toss-button'} onClick={this.handleToss}>Toss</button>)}
+                            <p className={'toss-status'}>{!this.state.tossEnabled && this.state.player2Serve ? "Toss won by Federer": (!this.state.tossEnabled && !this.state.player2Serve ? "Toss won by Nadal" : null)}</p>
                             </div>
                             <div className="col-md-4">
                             <p>Game starts</p>
