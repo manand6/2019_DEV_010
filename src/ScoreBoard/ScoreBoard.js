@@ -23,6 +23,7 @@ class ScoreBoard extends Component {
     this.advantageCheck = this.advantageCheck.bind(this);
     this.gameStatus = this.gameStatus.bind(this);
     this.gameWinner = this.gameWinner.bind(this);
+    this.resetScore = this.resetScore.bind(this);
   }
 
 
@@ -154,8 +155,8 @@ advantageCheck(){
 
 //update winner after each set
 gameWinner(){
-  if (this.state.winner1 ){
-
+  this.resetScore();
+  if (this.state.winner1 ) {
     this.setState(prevState => {
               return Object.assign({}, prevState, {
                 [prevState.currentGame]: {
@@ -166,7 +167,7 @@ gameWinner(){
             });
   }
 
-  if (this.state.winner2){
+  if (this.state.winner2) {
       this.setState(prevState => {
                 return Object.assign({}, prevState, {
                   [prevState.currentGame]: {
@@ -178,7 +179,18 @@ gameWinner(){
   }
 }
 
+  //reset the score after each game
+  resetScore(){
 
+    this.setState({
+    player1Score: 0,
+      player2Score: 0,
+      player1Points: '0',
+      player2Points: '0',
+      equalStatus1: ' ',
+      equalStatus2: ' ',
+    });
+  }
 
 
   render() {
@@ -201,7 +213,7 @@ gameWinner(){
           <td>{this.state[2].gamePoint2}</td>
           <td>{this.state[3].gamePoint2}</td>
           <td>{this.state.player2Points}</td>
-          <td>0</td>
+          <td>{this.state.equalStatus2}</td>
         </tr>
         <tr>
           <td>Nadal</td>
@@ -210,7 +222,7 @@ gameWinner(){
           <td>{this.state[2].gamePoint1}</td>
           <td>{this.state[3].gamePoint1}</td>
           <td>{this.state.player1Points}</td>
-          <td>0</td>
+          <td>{this.state.equalStatus1}</td>
         </tr>
       </tbody>
       </table>
