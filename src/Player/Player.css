@@ -1,0 +1,30 @@
+.court {
+
+    background-image: url('./images/tenniscourt.png');
+          /* Full height */
+  
+          /* Center and scale the image nicely */
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+  }
+
+  .img-style1 {
+    border-radius: 50%;
+    width:100px;
+  }
+  .img-style2 {
+    border-radius: 50%;
+    width:100px;
+  }
+
+  .nadal {
+      position: absolute;
+      bottom: 50px;
+      margin-left: -50px;
+  }
+  .federer {
+    position: absolute;
+    top: 50px;
+    margin-left: -50px;
+}
