@@ -24,11 +24,9 @@ it('handle play function called', () => {
     wrapper = mount(<Tennis {...props} />)
     wrapper.instance().handlePlay = jest.fn();
     wrapper.instance().forceUpdate();
-    console.log(wrapper);
     wrapper.update();
     wrapper.find('button').simulate('click');
     expect(wrapper.instance().handlePlay).toHaveBeenCalled();
-    console.log(wrapper.state());
   });
 
   
@@ -73,7 +71,6 @@ test('Check if Player 2 won', () => {
     expect (wrapper.state().hit). toEqual(1);
   });
   wrapper.instance().handlePlay();
-  console.log(wrapper.state());
   // expect(wrapper.state().player2Won).toEqual(true);
   expect(wrapper.instance().props.playGame());
   

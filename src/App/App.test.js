@@ -34,7 +34,7 @@ it('click toss button', () => {
       matchWinner1: true
         });
     var rendered =  wrapper.find('.match-status');
-  expect(rendered.text()). toEqual('Federer won the match');
+  expect(rendered.text()). toEqual('Nadal won the match');
   });
 
       it('check if player 2 won the match ', () => {
@@ -44,7 +44,7 @@ it('click toss button', () => {
             matchWinner2: true
              });
           var rendered =  wrapper.find('.match-status');
-        expect(rendered.text()). toEqual('Nadal won the match');
+        expect(rendered.text()). toEqual('Federer won the match');
         });
 
         it('check if player 1 serves', () => {
