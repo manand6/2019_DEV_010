@@ -6,7 +6,13 @@ class ScoreBoard extends Component {
     super(props);
     this.state = {
       player1Score: 0,
-      player2Score: 0
+      player2Score: 0,
+      player1Points: '0',
+      player2Points: '0',
+      1: { gamePoint1:0 , gamePoint2:0 },
+      2: { gamePoint1:0 , gamePoint2:0 },
+      3: { gamePoint1:0 , gamePoint2:0 },
+      currentGame:1,
     };
 
     this.updatePlayer1Table = this.updatePlayer1Table.bind(this);
@@ -41,13 +47,37 @@ class ScoreBoard extends Component {
   }
 
   updatePlayer1Table(score){
-    
-      console.log(score);
+    switch(score){
+      case 1 :
+      this.setState({ player1Points: '15' });
+      break;
+      case 2 :
+      this.setState({ player1Points: '30' });
+      break;
+      case 3 :
+      this.setState({ player1Points: '40' });
+      break;
+      case 4 :
+      break;
+      default :
+  }
 }
 
 updatePlayer2Table(score){
-    
-  console.log(score);
+  switch(score){
+      case 1 :
+      this.setState({ player1Points: '15' });
+      break;
+      case 2 :
+      this.setState({ player1Points: '30' });
+      break;
+      case 3 :
+      this.setState({ player1Points: '40' });
+      break;
+      case 4 :
+      break;
+      default :
+  }
 }
 
   render() {
@@ -69,7 +99,7 @@ updatePlayer2Table(score){
           <td>0</td>
           <td>0</td>
           <td>0</td>
-          <td>0</td>
+          <td>{this.state.player2Points}</td>
           <td>0</td>
         </tr>
         <tr>
@@ -78,7 +108,7 @@ updatePlayer2Table(score){
           <td>0</td>
           <td>0</td>
           <td>0</td>
-          <td>0</td>
+          <td>{this.state.player1Points}</td>
           <td>0</td>
         </tr>
       </tbody>
