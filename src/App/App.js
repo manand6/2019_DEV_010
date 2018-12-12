@@ -13,6 +13,8 @@ class App extends Component {
         player2Serve:false,
         enableGame:false,
         tossEnabled: true,
+        matchWinner1: false,
+        matchWinner2: false,
         winnerData: {}
     };
 
@@ -43,15 +45,31 @@ class App extends Component {
           })
       } 
 
-        //transfer data from Tennis to App which should be passed to Scoreboard
-        updateTable = (winner) => {
-          this.setState({
-            winnerData: winner
-          });
-          this.setState({
-            player2Serve: false
-          });
-        }
+    //transfer data from Tennis to App which should be passed to Scoreboard
+    updateTable = (winner) => {
+      this.setState({
+        winnerData: winner
+      });
+      this.setState({
+        player2Serve: false
+      });
+    }
+
+    //decide the match winner
+    matchWinner = (matchWinner) => {
+      if (matchWinner === 'player1') {
+      this.setState({
+        matchWinner1: true,
+        enableGame: false
+      });
+
+    } else if (matchWinner === 'player2') {
+      this.setState({
+        matchWinner2: true,
+        enableGame: false
+      });
+    }
+  }
 
 
 
@@ -61,12 +79,13 @@ class App extends Component {
         <div className="container">
         <div className="row">
             <div className="col-md-4">
-                            <ScoreBoard updateWinner={this.state.winnerData}/>
+                            <ScoreBoard matchWinner={this.matchWinner} updateWinner={this.state.winnerData}/>
                             {this.state.tossEnabled && (<button className={'btn toss-button'} onClick={this.handleToss}>Toss</button>)}
                             <p className={'toss-status'}>{!this.state.tossEnabled && this.state.player2Serve ? "Toss won by Federer": (!this.state.tossEnabled && !this.state.player2Serve ? "Toss won by Nadal" : null)}</p>
                             </div>
                             <div className="col-md-4 courtImage">
                             <Player />
+                            <p className={'match-status'}>{this.state.matchWinner1 ? "Federer won the match" : (this.state.matchWinner2 ? "Nadal won the match" : null)}</p>
                             </div>
                             <div className="col-md-4">
                             {this.state.enableGame ? <Tennis playGame={this.updateTable} enable={this.state.enableGame}/> : null }

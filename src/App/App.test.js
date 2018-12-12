@@ -46,4 +46,59 @@ it('click toss button', () => {
         var rendered =  wrapper.find('.toss-status');
       expect(rendered.find('.toss-status').text()). toEqual('Toss won by Nadal');
       });
+
+      it('check if player 1 won the match ', () => {
+
+        wrapper.setState({
+          matchWinner1: true
+           });
+        var rendered =  wrapper.find('.match-status');
+      expect(rendered.text()). toEqual('Federer won the match');
+      });
+
+      it('check if player 2 won the match ', () => {
+
+          const newSet = jest.fn();
+          wrapper.setState({
+            matchWinner2: true
+             });
+          var rendered =  wrapper.find('.match-status');
+        expect(rendered.text()). toEqual('Nadal won the match');
+        });
+
+        it('check if player 1 serves', () => {
+            const updateTable = jest.fn();
+            const data = {
+              player1Won : true,
+              player2Won : false
+            }
+            wrapper.instance().updateTable(data);
+            expect (wrapper.state().player2Serve). toEqual(false);
+          });
+
+          it('check if player 2 serves', () => {
+              const updateTable = jest.fn();
+              const data = {
+                player1Won : false,
+                player2Won : true
+              }
+              wrapper.instance().updateTable(data);
+              expect (wrapper.state().player2Serve). toEqual(false);
+            });
+
+          it('check if player 1 won the match', () => {
+              const matchWinner = jest.fn();
+              const won = 'player1';
+
+              wrapper.instance().matchWinner(won);
+              expect (wrapper.state().matchWinner1). toEqual(true);
+            });
+
+          it('check if player 2 won the match', () => {
+              const matchWinner = jest.fn();
+              const won = 'player2';
+              wrapper.instance().matchWinner(won);
+              expect (wrapper.state().matchWinner2). toEqual(true);
+            });
+
 });
