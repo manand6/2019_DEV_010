@@ -81,11 +81,10 @@ class App extends Component {
             <div className="col-md-4">
                             <ScoreBoard matchWinner={this.matchWinner} updateWinner={this.state.winnerData}/>
                             {this.state.tossEnabled && (<button className={'btn toss-button'} onClick={this.handleToss}>Toss</button>)}
-                            <p className={'toss-status'}>{!this.state.tossEnabled && this.state.player2Serve ? "Toss won by Federer": (!this.state.tossEnabled && !this.state.player2Serve ? "Toss won by Nadal" : null)}</p>
                             </div>
                             <div className="col-md-4 courtImage">
                             <Player />
-                            <h2 className={'match-status'}>{this.state.matchWinner1 ? "Federer won the match" : (this.state.matchWinner2 ? "Nadal won the match" : null)}</h2>
+                            <p className={'match-status'}>{this.state.matchWinner1 ? "Federer won the match" : (this.state.matchWinner2 ? "Nadal won the match" : null)}</p>
                             </div>
                             <div className="col-md-4">
                             {this.state.enableGame ? <Tennis playGame={this.updateTable} enable={this.state.enableGame}/> : null }

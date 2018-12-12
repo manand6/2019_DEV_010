@@ -20,7 +20,24 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.
 
-## ABout this kata
+## About this kata
 
 Reference : (https://gist.github.com/MatteoPierro/22e09a2b5d9e41fdd8c226d318fc0984)
 
+## This App consists of 
+
+_App component
+
+This will have functionality related to toss and enable the game option
+
+_Tennis component
+
+this will have the play button logic. This component result will be passed to Scoreboard for update
+
+_Scoreboard component
+
+This will update the score board
+
+_Player component
+
+This will have the player details
